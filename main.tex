@@ -1,0 +1,1090 @@
+%------------------------------------------------------------------------------
+%               Formelsammlung Theoretische E-Technik II
+%------------------------------------------------------------------------------
+% Themengebiete:            (Zeile)
+%    1. Allgemeines         (   38)
+%    2. Transformationen    (  150)
+%    3. Finite Elemente     (  333)
+%    4. Skin - Effekt       (  798)
+%    5. Wellen              (  988)
+%
+% F"ur die Richtigkeit der Formeln wird keine Gew"ahr "ubernommen, sachliche und
+% TeXnische Verbe"serungsvorschl"age werden gern entgegengenommen.
+% 
+%                                       Stefan Goebel
+%------------------------------------------------------------------------------
+\documentstyle[12pt,german]{article}
+% \input prepicte.tex \input pictex.tex \input postpict.tex
+\parskip1ex plus 0.5ex minus 0.5ex   \parindent0pt    \sloppy
+\addtolength{\textheight}{5cm}       \addtolength{\textwidth}{3cm}
+\addtolength{\topmargin}{-2cm}       \addtolength{\oddsidemargin}{-1.5cm}
+\pagestyle{myheadings} \markright{Formelsammlung Theoretische ET II}
+\newcommand{\ROT}{{\rm rot \:}}                                         % [m]
+\newcommand{\DIV}{{\rm div \:}}                                         % [m]
+\newcommand{\GRAD}{{\rm grad \:}}                                       % [m]
+\newcommand{\INT}{\int\limits}                                          % [m]
+\newcommand{\IINT}{\int\!\!\!\!\int}                                    % [m]
+\newcommand{\IIINT}{\int\!\!\!\!\int\!\!\!\!\int}                       % [m]
+\newcommand{\OIINT}{\int\hspace{-4mm}\bigcirc\hspace{-4.2mm}\int}       % [m]
+\begin{document}
+\centerline{\Large\bf Formelsammlung Theoretische ET II} \bigskip\hrule\bigskip
+\centerline{{\footnotesize (Letzte Bearbeitung: 12.07.1991}} \bigskip
+\tableofcontents  \bigskip \hrule \bigskip
+%==============================================================================
+\section{Wichtige Gr"o"sen}
+\begin{tabular*}{\textwidth}{l@{\extracolsep\fill}p{13cm}}
+$\vec{F}$&Feld allgemein\\
+$\vec{H}$&magnetische Feldst"arke\\
+$\vec{E}$&Elektrische Feldst"arke\\
+&\\
+$\vec{P}$&Potential allgemein\\
+$\vec{V}$&Skalarpotential\\
+$\vec{A}$&Vektorpotential\\
+&\\
+$\vec{p}=\vec{E}\times\vec{H}$&Poyntingscher Vektor, Leistung im
+          elektromagnetischen Feld\\
+$\DIV \vec{p}=-p_v$&Verlustleistungsdichte\\
+%$$&\\$$&\\$$&\\$$&\\
+\end{tabular*}
+
+%------------------------------------------------------------------------------
+\subsection{Ableitungen der Besselfunktionen}
+gew"ohnliche Besselfunktionen 1. und 2. Art
+$$\frac{d{\cal J}_n(x)}{dx}=-{\cal J}_{n+1}(x)+\frac{n}{x}{\cal J}_n(x) \quad
+  {\rm und} \quad
+      \frac{d{\cal N}_n(x)}{dx}=-{\cal N}_{n+1}(x)-\frac{n}{x}{\cal N}_n(x)$$
+modifizierte Besselfunktionen 1. und 2. Art
+$$\frac{d{\cal I}_n(x)}{dx}={\cal I}_{n+1}(x)+\frac{n}{x}{\cal I}_n(x) \quad
+  {\rm und} \quad
+      \frac{d{\cal K}_n(x)}{dx}=-{\cal K}_{n+1}(x)-\frac{n}{x}{\cal K}_n(x)$$
+%------------------------------------------------------------------------------
+\subsection{Vektoroperationen}
+\subsubsection{Rotation eines Vektorfeldes}
+$$\ROT\vec{V}=\left|\begin{array}{ccc}\vec{e}_x&\vec{e}_y&\vec{e}_z\\
+  \frac{\partial}{\partial x}&\frac{\partial}{\partial
+  y}&\frac{\partial}{\partial z}\\ \vec{V}_x &
+  \vec{V}_y&\vec{V}_z\\ \end{array}\right| =
+  \left|\begin{array}{ccc}\vec{e}_{\rho}&\vec{e}_{\varphi}&\vec{e}_z\\
+  \frac{\partial}{\partial \rho}&\frac{1}{\rho}\frac{\partial}{\partial
+  \varphi}&\frac{\partial}{\partial z}\\
+  \vec{V}_{\rho} &\vec{V}_{\varphi}&\vec{V}_z\\ \end{array}\right| =
+  \frac{1}{r^2\sin\vartheta}
+  \left|\begin{array}{ccc}
+   \vec{e}_r&r\vec{e}_{\vartheta}&r\sin\vartheta\vec{e}_{\varphi}\\
+   \frac{\partial}{\partial r}&\frac{\partial}{\partial \vartheta}
+                              &\frac{\partial}{\partial \varphi}\\
+   \vec{V}_r&r\vec{V}_{\vartheta}&r\sin\vartheta\vec{V}_{\varphi}\\
+  \end{array}\right| $$
+
+\subsubsection{Divergenz eines Vektorfeldes}
+\begin{eqnarray*}
+  \DIV\vec{V}=\vec{\nabla}\vec{V}&=&\frac{\partial V_x}{\partial x}+
+  \frac{\partial V_y}{\partial y}+\frac{\partial V_z}{\partial z}\\
+  &=&\frac{1}{\rho}
+  \frac{\partial \rho V_{\rho}}{\partial\rho}+\frac{1}{\rho}
+  \frac{\partial V_{\varphi}}{\partial \varphi}+
+  \frac{\partial V_z}{\partial z}\\
+  &=&\frac{1}{r^2}\frac{\partial r^2 V_r}{\partial r}
+  +\frac{1}{r\sin\vartheta}\frac{\partial V_{\varphi}}{\partial \varphi}
+  +\frac{1}{r\sin\vartheta}\frac{\partial \sin\vartheta V_{\vartheta}}{\partial
+  \vartheta}
+\end{eqnarray*}
+
+\subsubsection{Gradient eines Skalarfeldes}
+\begin{eqnarray*}
+  \GRAD\Phi&=&\left(\frac{\partial \Phi}{\partial x}\vec{e}_x+
+  \frac{\partial \Phi}{\partial y}\vec{e}_y+\frac{\partial \Phi}{\partial
+  z}\vec{e}_z\right)\\&=&
+  \left(\frac{\partial \Phi}{\partial \rho}\vec{e}_{\rho}+
+  \frac{1}{\rho}\frac{\partial \Phi}{\partial \varphi}\vec{e}_{\varphi}
+  +\frac{\partial \Phi}{\partial z}\vec{e}_z\right)\\&=&
+  \left(\frac{1}{r}\frac{\partial \Phi}{\partial \vartheta}\vec{e}_{\vartheta}+
+  \frac{1}{r\sin\vartheta}\frac{\partial \Phi}{\partial \varphi}\vec{e}_
+  {\varphi}+\frac{\partial \Phi}{\partial r}\vec{e}_r\right)
+\end{eqnarray*}
+
+\subsubsection{Kreuzprodukt}
+$$\vec{A}\times\vec{B}=\left|\begin{array}{ccc}\vec{e}_1&\vec{e}_2&\vec{e}_3\\
+  A_1&A_2&A_3\\B_1&B_2&B_3\\ \end{array} \right|$$
+
+%------------------------------------------------------------------------------
+\subsection{Koordinatenumrechnungen}
+\subsubsection{Zylinderkoordinaten}
+\parbox{3cm}{\begin{eqnarray*}
+ x&=&\rho \cos \varphi \\
+ y&=&\rho \sin \varphi \\
+ z&=&z
+ \end{eqnarray*}}\hfill
+\parbox{6cm}{\begin{eqnarray*}
+ \vec{e}_{\rho}&=&\vec{e}_x\cos\varphi + \vec{e}_y\sin\varphi\\
+ \vec{e}_{\varphi}&=&-\vec{e}_x\sin\varphi + \vec{e}_y\cos\varphi\\
+ \vec{e}_z&=&\vec{e}_z
+ \end{eqnarray*}}\hfill
+\parbox{6cm}{\begin{eqnarray*}
+ \vec{e}_x&=&\vec{e}_{\rho}\cos\varphi - \vec{e}_{\varphi}\sin\varphi\\
+ \vec{e}_y&=&\vec{e}_{\rho}\sin\varphi + \vec{e}_{\varphi}\cos\varphi\\
+ \vec{e}_z&=&\vec{e}_z
+ \end{eqnarray*}}
+
+\subsubsection{Kugelkoordinaten}
+\parbox{5cm}{\begin{eqnarray*}
+ x&=&r\sin\vartheta \cos\varphi \\
+ y&=&r\sin\vartheta \sin\varphi \\
+ z&=&r\cos\vartheta
+ \end{eqnarray*}}
+\parbox{10cm}{\begin{eqnarray*}
+\vec{e}_r&=&\vec{e}_x\sin\vartheta\cos\varphi + \vec{e}_y\sin\vartheta\sin
+  \varphi+\vec{e}_z\cos\vartheta\\
+\vec{e}_{\vartheta}&=&\vec{e}_x\cos\vartheta\cos\varphi + \vec{e}_y\cos
+  \vartheta\sin\varphi+\vec{e}_z\sin\vartheta\\
+\vec{e}_{\varphi}&=&-\vec{e}_x\sin\varphi + \vec{e}_y\cos\varphi
+\end{eqnarray*}}
+
+\subsection{Winkelfunktionen} $$\sin = \frac{Gegenkathete}{Hypotenuse} \qquad \cos = \frac{Ankathete}{Hypotenuse}$$ siehe kleine Formelsammlung Seite 14
+%\subsection{Logarithmus}
+%==============================================================================
+\clearpage \section{Transformationen}
+%------------------------------------------------------------------------------
+\subsection{M"obius-Transformation}
+Verkn"upfung grundlegender analytischer Funktionen zu einer Abbildungsfunktion.
+
+M"obius-Transformation ist eindeutig umkehrbar, bildet {\it drei} w"ahlbare Punkte
+aus der $z$-Ebene in {\it drei} Punkte in der $w$-Ebene ab, von denen {\it einer} im
+Unendlichen liegen kann.
+
+\subsubsection{Kreis mit {\bf\it nicht}\/ homogenem Potentialverlauf}
+      $\Rightarrow$ auf die obere H"alfte der $w$-Ebene abbilden;
+      Plattenkondensator
+
+M"obius-Transformation, f"ur $\alpha \delta - \beta \gamma \not= 0$
+
+$$w=\frac{\alpha z+\beta}{\gamma z+\delta} =\frac{\beta}{\delta}
+\frac{\frac{\alpha}{\beta}z+1}{\frac{\gamma}{\delta}z+1} \Rightarrow
+\fbox{$w=j\frac{a-z}{a+z}$}$$ mit $\frac{\beta}{\delta}=j$ aus Kreismittelpunkt,
+$\frac{\alpha}{\beta}=-\frac{1}{a}$ und $\frac{\gamma}{\delta}=\frac{1}{a}$ aus
+Punkten am Kreis auf der $x$-Achse.
+
+Umkehrfunktion f"ur die R"ucktransformation
+$$z=-\frac{\delta w-\beta}{\gamma w-\alpha} \Rightarrow
+\fbox{$z=a\frac{j-w}{j+w}$}$$
+
+\begin{enumerate}
+\item drei Punkte w"ahlen, die zu transformieren sind, um eine  Anordnung
+      in der $w$-Ebene zu erhalten (siehe oben).
+\item Tabelle f"ur $z_\lambda$ und $w_\lambda$ in den drei Punkten aufstellen
+\item Konstanten f"ur Berandungspunkte bestimmen (Werte aus der Tabelle)\\
+      {\sl (evtl. weitere Werte aufnehmen oder Zahl der Unbekannten
+      reduzieren, siehe oben)}\\
+      $\Rightarrow$ Abbildungsfunktion und Umkehrfunktion, damit
+      markante Punkte f"ur den Potentialverlauf in die $w$-Ebene
+            transformieren
+\item komplexes Potential
+     $$P_m(w_p)=-\frac{\mu_0}{\pi}\int\limits_{-\infty}^\infty V_m(u_Q)
+     \frac{du_Q}{w_p-u_Q}$$
+\item konjugiert komplexe Feldst"arke (mit $\frac{dz}{dw}= a\frac{-2j}{(j+w)^2}$)
+      $$E^\ast(z_p)=-\frac{dP_m(w_p)}{dw_p}\frac{1}{\frac{dz_p}{dw_p}} \qquad
+      B^\ast(z)=j\frac{dP_m(w)}{dw} \frac{1}{\frac{dz}{dw}}$$
+
+\end{enumerate}
+
+\clearpage
+
+\subsubsection{Kreisf"ormige Anordnung mit jeweils homogenem Potentialverlauf}
+      $\Rightarrow$ Zylinderkondensator
+
+M"obius-Transformation, f"ur $\alpha \delta - \beta \gamma \not= 0$
+
+$$w=\frac{\alpha z+\beta}{\gamma z+\delta} =\frac{\alpha}{\gamma}
+\frac{z+\frac{\beta}{\alpha}}{z+\frac{\delta}{\gamma}}\Rightarrow
+\fbox{$w=r\frac{z+s}{z+t}$}$$
+
+Umkehrfunktion f"ur die R"ucktransformation
+$$z=-\frac{\delta w-\beta}{\gamma w-\alpha}$$
+
+\begin{enumerate}
+\item drei Punkte w"ahlen, die zu transformieren sind, um
+      eine rotation"symetrische Anordnung zu erhalten (Zylinderkondensator)
+\item Tabelle f"ur $z_\lambda$ und $w_\lambda$ in den drei Punkten aufstellen
+\item Konstanten f"ur Berandungspunkte bestimmen (Werte aus der Tabelle)\\
+      {\sl (evtl. weitere Werte aufnehmen oder Zahl der Unbekannten
+      reduzieren)}\\
+      $\Rightarrow$ Abbildungsfunktion und Umkehrfunktion, damit
+      markante Punkte f"ur den Potentialverlauf in die $w$-Ebene
+      transformieren
+\item komplexes Potential
+     $$P_m(w_p)=-\frac{\mu_0}{\pi}\int\limits_{-\infty}^\infty V_m(u_Q)
+     \frac{du_Q}{w_p-u_Q}$$
+\item konjugiert komplexe Feldst"arke
+      $$E^\ast(z_p)=-\frac{dP_m(w_p)}{dw_p}\frac{1}{\frac{dz_p}{dw_p}} \qquad
+      B^\ast(z)=j\frac{dP_m(w)}{dw} \frac{1}{\frac{dz}{dw}}$$
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+\clearpage
+\subsection{Schwarz-Christoffel-Transformation}
+Bestimmen von Potential- und Feldlinienverl"aufen innerhalb einer polygonal
+begrenzten Fl"ache der $z$-Ebene (auch mit parallelen und offenen Kanten) durch
+Transformation in die obere H"alfte der $w$-Ebene.
+
+\begin{enumerate}
+\item Die Anordnung wird von einer Kurve in positiver Richtung durchlaufen,
+      wobei die Knickpunkte des Polygons ($P_\lambda$) auf Punkte der $u$-Achse
+      in der $w$-Ebene "ubertragen werden -- vorzugsweise $u_\lambda=-1,0,1$.
+      Hierbei darf h"ochstens ein Punkt im Unendlichen enden. Die Punkte,
+      die im Unendlichen enden ($P_\lambda'$ und $P_\lambda''$), werden
+      verbunden. {\it Symetrien bleiben bei der Transformation erhalten.}
+\item Tabelle f"ur $z_\lambda, \alpha_\lambda, w_\lambda$ aufstellen
+      ($\alpha_\lambda<0$ f"ur Rechtsknick, $\alpha_\lambda>0$ f"ur Linksknick,
+       Summe immer gleich 2)
+\item Schwarz-Christoffel-Integral (nach BRONSTEIN S.~87ff l"osen)
+     $$z=C\int\prod_{\lambda=1}^{n-1} (w-w_\lambda)^{-\alpha_\lambda}dw+C^\ast$$
+     (f"ur $z_\lambda=0 \rightarrow w_\lambda=0$ folgt $C^\ast=0$ integrieren von
+      0 \dots w)
+\item Konstanten bestimmen
+  \begin{enumerate}
+  \item Pol der $z$-Ebene $\rightarrow$ im Endlichen der $w$-Ebene, nur f"ur alle
+       $w_k\not=\infty$ (z.B. bei parallelen Kanten, Punkte gleichen Potentials,
+       siehe Hilfsbl"atter)
+        $$C=\frac{j}{\pi}(z_k''-z_k')\left[\prod_{\lambda=1/\lambda\not= k}^
+        {n-1}(w_k-w_\lambda)^{-\alpha_\lambda}\right]^{-1}$$
+  \item Pol der $z$-Ebene $\rightarrow$ im Unendlichen der $w$-Ebene
+        $$C=-\frac{j}{\pi}(z_k''-z_k')$$
+  \item $C^\ast$ in den Korrelationspunkten (z.B. $-1$ oder $1$) durch Einsetzen
+        bestimmen
+  \end{enumerate}
+\item komplexes Potential (mit $V(u')$ gesamtes Potential auf der $u$-Achse der
+     $w$-Ebene)
+     $$P(w_p)=\frac{j}{\pi}\int\limits_{-\infty}^\infty V(u') \frac{du'}{w_p-u'}$$
+     Potentialverteilung auf der reellen Achse ($u$) beachten, Integrale
+     entsprechend aufspalten, bei Grenzen im $\infty$en mit
+     $\lim_{u\rightarrow\infty}$ arbeiten
+\item konjugiert komplexe Feldst"arke
+    (mit $\frac{dz}{dw}=C\prod_{\lambda=1}^{n-1}(w-w_\lambda)^{-\alpha_\lambda}$
+      dem Integranden des Schwarz-Christoffel-Integrals)
+      $$E^\ast(z_p)=-\frac{dP(w_p)}{dw_p}\frac{1}{\frac{dz_p}{dw_p}} \qquad
+      B^\ast(z)=j\frac{dP(w)}{dw} \frac{1}{\frac{dz}{dw}}$$
+\end{enumerate}
+
+\clearpage
+\subsection{Transformation mit Hilfe analytischer Funktionen}
+\subsubsection{Abbildung der speziellen Parabel nach Schwarz-Christoffel}
+Zuerst in die Hilfsebene $\xi=r+j\varphi$, dann in die Transformationsebene
+$w=u+jv$ abbilden.
+
+Korrelationstafel f"ur $z=f(\xi)$
+\begin{center}\begin{tabular}{c||c|c|c|c|c}
+$\lambda$          & $1$ & $2$          & $3$  & $4$          &  \\ \hline \hline
+$z_{\lambda}$      & $1$ & $\infty +j0$ & $-1$ & $-\infty +j0$& $z_{\lambda}'$\\
+                   &     & $-\infty +j0$&      & $\infty +j0$ & $z_{\lambda}''$ \\ \hline
+$\alpha_{\lambda}$ & $-1$& $2$          & $-1$ & $2$          & $\sum \alpha_{\lambda}=2$ \\ \hline
+$\xi_{\lambda}$    & $1$ & $\infty$     & $-1$ & $0$          &  \\
+\end{tabular}\end{center}
+
+Korrelationstafel f"ur $w=g(\xi)$
+\begin{center}\begin{tabular}{c||c|c|c|c|c}
+$\lambda$          & $1$ & $2$             & $3$    & $4$             &  \\ \hline \hline
+$w_{\lambda}$      &     & $\infty +j0$    & $jv_a$ & $-\infty +jv_a$ & $z_{\lambda}'$ \\
+                   &     & $-\infty +jv_a$ &        & $-\infty +j0$   & $z_{\lambda}''$\\ \hline
+$\alpha_{\lambda}$ & $0$ & $1$             & $0$    & $1$             & $\sum \alpha_{\lambda}=2$ \\ \hline
+$\xi_{\lambda}$    &     & $\infty$        & $-1$   & $0$             &  \\
+\end{tabular}\end{center}
+
+Abbildungsfunktion mit Schwarz-Christoffel-Integral bestimmen
+$z=f(\xi)$:
+
+$z=\int (\xi -1 )^1 (\xi + 1)^1 (\xi -0)^{-2} d\xi+C^{\ast}\Rightarrow
+z=C\left[\xi+\frac{1}{\xi}\right]+C^{\ast}$
+
+Einsetzen eines Punktes ergibt die Konstanten: $C^{\ast}=0$ und $C=\frac{1}{2}$
+
+Abbildungsfunktion $w=g(\xi)$:
+$w=C\int (\xi-0)^{-1} d\xi + C^{\ast} \Rightarrow
+w= C\ln \xi + C^{\ast}$
+
+Einsetzen eines Punktes ergibt die Konstanten:
+$C^{\ast}=0$ und bei parallelen Kanten auf Pol im Unendlichen mit $v_a=\pi$
+folgt: $C=1$.
+
+Insgesamt ergibt sich die Abbildungsfunktion $z(w)= \frac{1}{2}(e^w+e^{-w})=
+\cosh w$ und die Umkehrfunktion $w= {\rm arcosh}\: z$
+
+\bigskip\hrule
+
+\subsubsection{Abbildung der speziellen Hyperbel nach Schwarz-Christoffel}
+Korrelationstafel f"ur $z=f(\xi)$
+\begin{center}\begin{tabular}{c||c|c|c|c}
+$\lambda$          & $1$ & $2$          & $3$             &  \\ \hline \hline
+$z_{\lambda}$      & $0$ & $\infty +j0$ & $1$  & $z_{\lambda}'$ \\
+                   &    & $0 +j\infty$&       & $z_{\lambda}''$\\ \hline
+$\alpha_{\lambda}$ & $\frac{1}{2}$ & $\frac{3}{2}$ & $0$  & $\sum \alpha_{\lambda}=2$ \\ \hline
+$\xi_{\lambda}$    & $0$ & $\infty$ & $1$  & \\
+\end{tabular}\end{center}
+Abbildungsfunktion bestimmen (mit $C^{\ast}=0$):
+$z=C\int (\xi-0)^{-\frac{1}{2}} d\xi$ und
+$w= C2\sqrt{\xi}$\\
+Einsetzen eines Punktes ergibt die Konstante: $C=\frac{1}{2}$.\\
+Keine weitere Abbildung n"otig: $\xi \rightarrow w$.
+
+%==============================================================================
+\clearpage \section{Finite Elemente}
+Ermittlung von Feld- und Potentiallinienverl"aufen beliebig berandeter Gebiete
+mit N"aherungsverfahren, auf zwei Arten von Differentialgleichungen anwendbar:
+
+Elliptische Dgl. (Anwendung: Laplace- bzw.\ Poi"son--Gleichung)
+$$\frac{\partial}{\partial x}\left(a_1 \frac{\partial f}{\partial x}\right)+
+  \frac{\partial}{\partial y}\left(a_2 \frac{\partial f}{\partial y}\right)+
+  \frac{\partial}{\partial z}\left(a_3 \frac{\partial f}{\partial z}\right)+
+  a_4 f+a_5=0$$
+
+Parabolische Dgl. (Anwendung: Diffusions- bzw.\ Skingleichung)
+$$\frac{\partial}{\partial x}\left(a_1 \frac{\partial f}{\partial x}\right)+
+  \frac{\partial}{\partial y}\left(a_2 \frac{\partial f}{\partial y}\right)+
+  \frac{\partial}{\partial z}\left(a_3 \frac{\partial f}{\partial z}\right)+
+  a_4 f+a_5=a_0\frac{\partial f}{\partial t} $$
+
+F"ur die Variablen $a_i$ gilt dabei:
+
+\begin{tabular}{l@{ --- }l}
+ parabolische Dgl.& $a_1,a_2,a_3,a_4,a_5,a_0=$konst. \\
+ elliptische Dgl. & $a_1,a_2,a_3,a_4,a_5=$konst., $a_0=0$ \\
+ Eulersche Dgl.   & $a_1(x,y),a_2(x,y),a_3(x,y),a_4(x,y),a_5(x,y)$, $a_0=0$ \\
+ Helmholtz Dgl.   & $a_1=a_2=1$, $a_4=$konst., $a_5=a_0=0$ \\
+ Poi"son Dgl.     & $a_1=a_2=1$, $a_4=a_0=0$, $a_5(x,y)$ \\
+ Laplace Dgl.     & $a_1=a_2=1$, $a_4=a_5=a_0=0$ \\
+\end{tabular}
+
+Anstatt die partielle Dgl. direkt numerisch zu l"osen ({\sl Finite Differenzen}),
+ist es bei der {\sl Finite Elemente Methode} vorteilhaft,
+das Randwertproblem in ein Variationsproblem zu
+"uberf"uhren. Dies besteht in der Ermittlung der Zielfunktion $f$ aus einer vorher
+minimierter Energie $W$, die ein Funktional von $f$ darstellt.
+
+\subsection{Jakobi--Determinante}
+Bedingung f"ur eine eindeutige, umkehrbare Abbildung ist die Existenz der
+Determinante im gesamten Integrationsbereich.
+$$J\; =\; \begin{array}{|cc|}\frac{\partial x}{\partial u}&
+\frac{\partial x}{\partial v}\\ & \\
+\frac{\partial y}{\partial u}&\frac{\partial y}{\partial v}\\
+\end{array}\; =\;\begin{array}{|ccc|}\frac{\partial x}{\partial u}&
+\frac{\partial x}{\partial v}&\frac{\partial x}{\partial w}\\ & &\\
+\frac{\partial y}{\partial u}&\frac{\partial y}{\partial v}&
+\frac{\partial y}{\partial w}\\ & &\\ \frac{\partial z}{\partial u}&
+\frac{\partial z}{\partial v}&\frac{\partial z}{\partial w}\\
+\end{array}$$
+
+\subsection{Energieintegral}
+\begin{eqnarray*}
+W(f)&=&\IIINT_v \frac{1}{2}\left[a_1\left(\frac{\partial
+f}{\partial x}\right)^2+a_2\left(\frac{\partial f}{\partial y}\right)^2+
+a_3\left(\frac{\partial f}{\partial z}\right)^2
+-a_4f^2\right]\\&&-a_5f+a_0\frac{\partial f}{\partial t}f\,
+dv+\OIINT_A \left[\frac{k_1}{2}f^2-f_cf\right]\,dA
+\end{eqnarray*}
+
+$$f_c=K_1f+K_2\frac{\partial f}{\partial n}$$
+
+in allgemeiner Form f"ur dreidimensionale Anordnungen. Je nach Anordnung
+(zwei- oder eindimensional), oder Problemstellung (Skin- bzw.\ Laplace-Dgl.)
+geht das
+Volumenintegral in ein Fl"achenintegral bzw.\ ein einfaches Integral "uber,
+hierbei sind die entsprechenden Koeffizienten $a_i$ Null zu setzen. Aus
+dem zweiten Integral wird ein Linienintegral oder die Grenzen werden so in den
+Integranden eingesetzt; durch diese {\sl Variation}  geht
+mit Hilfe des {\sl Euler'schen Theorems} das Energieintegral in das
+Energiefunktional "uber. ($\delta$ -- Totales Differential)
+$$W(V)\;\rightarrow\; min \qquad\Rightarrow\qquad \delta W(V)=0$$
+
+\subsubsection{Totales Differential}
+\begin{eqnarray*}
+\delta W(f)&=&\IIINT_v a_1\left(\frac{\partial
+f}{\partial x}\right)\delta\left(\frac{\partial f}{\partial x}\right)+a_2
+\left(\frac{\partial f}{\partial y}\right)\delta\left(\frac{\partial f}{\partial
+y}\right)+
+a_3\left(\frac{\partial f}{\partial
+z}\right)\delta\left(\frac{\partial f}{\partial z}\right)\\&&-a_4f\delta
+f-a_5\delta f+a_0\frac{\partial f}{\partial t}\delta f\,
+dv+\OIINT_A K_1f\delta f-f_c\delta f \, dA
+\equiv 0
+\end{eqnarray*}
+Anmerkung:
+
+\begin{tabular}{lll}
+  $\partial V/\partial x = \partial V/\partial y=0$ & $\Rightarrow$ &
+  Dirichlet--Problem\\ $k_1=0$ & $\Rightarrow$ & Neumann--Problem \\
+\end{tabular}
+
+\subsubsection{Partielle Integration mit zwei Ver"anderlichen (Produktintegration)}
+$$\IINT_A v(x,y)\frac{\partial}{\partial x}[v(x,y)]\,dA=\oint_C
+   v(x,y)u(x,y)n_x \,ds-\IINT_A \frac{\partial}{\partial
+   x}(v(x,y)u(x,y))\,dA$$
+
+$$\delta \frac{\partial f}{\partial x} = \delta f \frac{\partial}{\partial x} $$
+$$\mbox{mit:}\quad  \delta f = u(x,y) \quad\mbox{und}\quad v(x,y) =
+  \frac{\partial f}{\partial x} $$
+
+Einsetzen in das Totale Differential des Energiefunktionals liefert eine neue
+Gleichung, die null werden mu"s ($\delta W(f)=0$). Beachte: gleichartige
+Integranden zusammenfa"sen und null setzen.
+
+\subsection{Ritz'scher Ansatz f"ur Energieminimierung}
+N"aherungsl"osung $\tilde{f}$ statt $f$ in das Energiefunktional einsetzen:
+ ($W(\tilde{f})\; \rightarrow \; min$)
+$$\tilde{f}(x,y,z)=\sum_{i=1}^n c_i g_i (x,y,z)$$
+
+N"aherungsl"osung (modifizierter Ritz'scher Ansatz) f"ur ein Element
+mit $m$ Knotenpunkten:
+$$\tilde{f}^e(x,y,z) = \sum_{i=1}^m f_i^e N_i^e(x,y,z)\;\Rightarrow\;
+  \tilde{f}(x,y,z) = \sum_{j=1}^n f_j N_j$$
+
+\begin{tabular}{l@{ --- }l}
+$\tilde{f}(x,y,z)$ & N"aherungsl"osung: Ansatzfunktion\\
+$g_i(x,y,z)$       & linear unabh"angige Basisfunktionen \\
+$c_i$              & Koeffizienten\\[1ex]
+$N_i^e(x,y,z)$     & Einheits-Formfunktion: Basisfunktion in den Knotenpunkten\\
+                   & $N_i^e(x_j^e,y_j^e,z_j^e) = 1$ f"ur $j=i$, sonst $0$\\
+$f_i^e$            & Einheits-Knotenvariablen: Koeffizienten in den Knotenpunkten\\
+\end{tabular}
+
+Um die Extremalbedingung zu erhalten, ist die Matrizenschreibweise vorteilhaft:
+$$W(c)=c^T A c + c^T a \;\rightarrow\; min \qquad \mbox{(mit L"osungsvektor $c$)}$$
+\parbox{4cm}{$$c=\left[c_1, c_2, \ldots, c_n \right]$$} \hfill
+\parbox{3cm}{$$c^T=\left[\begin{array}{c} c_1\\ c_2\\ \vdots \\ c_n\\
+             \end{array}\right]$$} \hfill
+\parbox{4cm}{$$a=\left[\begin{array}{c} \oint_C \tilde{I}_C (g_1)\, ds \\
+   \oint_C \tilde{I}_C (g_2)\, ds \\ \vdots \\ \oint_C \tilde{I}_C (g_n)\, ds \\
+   \end{array} \right] $$}
+
+$$A=\left[\begin{array}{ccc}
+ \IINT_A\tilde{I}_A(g_1,g_1)\, dA & \ldots & \IINT_A\tilde{I}_A(g_1,g_n)\, dA \\
+          \vdots                  & \ddots &            \vdots              \\
+ \IINT_A\tilde{I}_A(g_n,g_1)\, dA & \ldots & \IINT_A\tilde{I}_A(g_n,g_n)\, dA \\
+ \end{array}\right] \qquad \mbox{(symetrische Matrix)}$$
+
+
+Die besondere Eigenschaft der Formfunktion $N_j^e$ in den Einheitselementen
+erlaubt die einfache Addition aller Formfunktionen in jedem Knotenpunkt $j$ zur
+globalen Formfunktion $N_j$. Das Energieintegral besitzt dann die Matrizenform:
+$$W(f)=f^T S f + d^T f \;\rightarrow\; min \quad \mbox{(mit Gesamtl"osungsvektor $f$)}$$
+\parbox{4cm}{$$f=\left[f_1, f_2, \ldots, f_n \right]$$} \hfill
+\parbox{2.5cm}{$$f^T=\left[\begin{array}{c} f_1\\ f_2\\ \vdots \\ f_n\\
+             \end{array}\right]$$} \hfill
+\parbox{4.5cm}{$$d=\left[\begin{array}{c} \oint_{C_0} \tilde{I}_{C_0} (N_1^e)\, ds \\
+   \oint_{C_0} \tilde{I}_{C_0} (N^e_2)\, ds \\ \vdots \\ \oint_{C_0} \tilde{I}_{C_0} (N^e_n)\, ds \\
+   \end{array} \right] $$}
+
+$$S=\left[\begin{array}{ccc}
+ \IINT_{A_0}\tilde{I}_{A_0}(N^e_1,N^e_1)\, dA_0 & \ldots & \IINT_{A_0}\tilde{I}_{A_0}(N^e_1,N^e_n)\, dA_0 \\
+          \vdots                  & \ddots &            \vdots              \\
+ \IINT_{A_0}\tilde{I}_{A_0}(N^e_n,N^e_1)\, dA_0 & \ldots & \IINT_{A_0}\tilde{I}_{A_0}(N^e_n,N^e_n)\, dA_0 \\
+ \end{array}\right] \quad \mbox{(symetrische Matrix)}$$
+
+Zum Erf"ullen der Extremalbedingung sind die Koeffizienten, das hei"st der
+L"osungsvektor, zu bestimmen.
+$$\fbox{$ A c +a = 0 $}\qquad\fbox{$ S f + d = 0 $}$$
+$$\fbox{$c=-A^{-1}a$}\qquad\fbox{$f=-S^{-1}d$}$$
+
+\subsubsection{Eindimensionale Elemente --- Einheitselement}
+\begin{itemize}
+\item Lineare Ansatzfunktion: $\tilde{f}^e(u)=c_1+c_2u$
+\item Quadratische Ansatzfunktion: $\tilde{f}^e(u)=c_1+c_2u+c_3u^2$
+\item Kubische Ansatzfunktion: $\tilde{f}^e(u)=c_1+c_2u+c_3u^2+c_4u^3$
+\item Transformation: $x=x_j+u(x_{j+1}-x_j)$ daraus ergibt sich f"ur das
+      Energiefunktional (mit $a_2=a_3=a_0=0$):
+      $$W(f)=\INT_0^1 \left(\frac{1}{2} \left[ a_1
+      \frac{\left(\frac{\partial f}{\partial u}\right)^2}{(\Delta x_j)^2} - a_4
+      f^2 \right] -a_5 f \right) \Delta x_j \, du + \left[ \frac{1}{2} k_1
+      f^2(u) -f_C(u)f(u)\right]_0^1$$
+\end{itemize}
+
+\subsubsection{Zweidimensionale Elemente}
+
+\begin{itemize}
+\item Lineare/Bilineare Ansatzfunktion f"ur
+    \begin{itemize}
+    \item Einheitsdreieck: $\tilde{f}^e(u,v)=c_1+c_2u+c_3v$
+    \item Einheitsquadrat: $\tilde{f}^e(u,v)=c_1+c_2u+c_3v+c_4uv$
+    \end{itemize}
+\item Quadratische Ansatzfunktion f"ur
+    \begin{itemize}
+    \item Einheitsdreieck:
+      $\tilde{f}^e(u,v)=c_1+c_2u+c_3v+c_4u^2+c_5uv+c_6v^2$
+    \item Einheitsquadrat:
+      $\tilde{f}^e(u,v)=c_1+c_2u+c_3v+c_4u^2+c_5uv+c_6v^2+c_7u^2v+c_8uv^2$
+    \end{itemize}
+\item Transformationen:
+   \begin{itemize}
+   \item Dreieck $\rightarrow$ Einheitsdreieck:\\
+     $x=x_j+u(x_{j+1}-x_j)+v(x_{j+2}-x_j)$ und\\
+     $y=y_j+u(y_{j+1}-y_j)+v(y_{j+2}-y_j)$
+   \item Parallelogramm $\rightarrow$ Einheitsquadrat:\\
+     $x=x_j+u(x_{j+1}-x_j)+v(x_{j+2}-x_j)$ und \\
+     $y=y_j+u(y_{j+1}-y_j)+v(y_{j+2}-y_j)$\\
+     wie beim Dreieck, da durch drei Ecken eindeutig festgelegt
+   \item Krummliniges Dreieck $\rightarrow$ Einheitsdreieck:\\
+     $x=c_1+c_2u+c_3v+c_4u^2+c_5uv+c_6v^2$ und \\
+     $y=d_1+d_2u+d_3v+d_4u^2+d_5uv+d_6v^2$ \\
+     (h"ohergradige Ansatzfunktionen verwenden)
+   \item Krummliniges Viereck $\rightarrow$ Einheitsquadrat:\\
+     $x=c_1+c_2u+c_3v+c_4u^2+c_5uv+c_6v^2+c_7u^2v+c_8uv^2$ und\\
+     $y=d_1+d_2u+d_3v+d_4u^2+d_5uv+d_6v^2+d_7u^2v+d_8uv^2$
+   \end{itemize}
+\end{itemize}
+
+%\subsubsection{Dreidimensionale Anordnung}
+%Transformation:\\
+%    $x=x_j+u(x_{j+1}-x_j)+v(x_{j+2}-x_j)+w(x_{j+3}-x_j)$, \\
+%    $y=y_j+u(y_{j+1}-y_j)+v(y_{j+2}-y_j)+w(y_{j+3}-y_j)$ und \\
+%    $z=z_j+u(z_{j+1}-z_j)+v(z_{j+2}-z_j)+w(z_{j+3}-z_j)$ \\
+
+\subsection{L"osungsverfahren}
+\begin{description}
+
+\item[Typ 1 --- Gegeben:] Energiefunktional $W(f(x,y))$, au"serdem die
+     Basisfunktionen $g_1(x,y)$ und $g_2(x,y)$
+   \begin{enumerate}
+   \item Differentialgleichung aus $W(f)$ ermitteln: Integrand des ersten
+         Integrals, daraus $a_i$ und den Typ ermitteln
+   \item Ritz'scher Ansatz: gegebene $g_i$, $c_n$ ($\tilde{f}$) einsetzen,
+   \item Kurvenintegral aus Randwertvorgaben bestimmen:
+   \begin{itemize}
+     \item Teilintegrale "uber Teilgebiete, -strecken bilden, hierbei
+           Potentialvorgaben ber"ucksichtigen.
+           Koeffizientenvergleich mit Ansatz $$k_1f+a_1\frac{\partial
+           f}{\partial x}n_x+a_2\frac{\partial f}{\partial y}n_y=f_c$$
+           hieraus $k_1$ und $f_c$ ermitteln ($n_x$ in $y$-Richtung $=1$, und
+           $n_y$ in $y$-Richtung $=0$)
+     \item Ansatzfunktion, Koeffizienten $a_i$ und $k_1$ in Energiefunktional
+           einsetzen, dann integrieren. $c_n$ aus $\partial W_i/\partial c_i =0$
+           bestimmen. F"ur homogenes Gleichung"system Matrizenschreibweise:
+           $A_1 c + A_2 \beta^2 c = 0$
+   \end{itemize}
+   \end{enumerate}
+
+\item[Typ 2 --- Gegeben:] Potentialvorgabe $V_0$ und $V=0$ auf Zylinderkondensator
+     und Basisfunktionen $g_1$, $g_2$ und $g_3$. Rechnen mit Laplace-Dgl.\ in
+     Zylinderkoordinaten:
+     $$\Delta V = \frac{1}{\rho} \frac{\partial}{\partial \rho}\left( \rho
+     \frac{\partial V}{\partial\rho}\right) + \frac{1}{\rho^2}
+     \frac{\partial^2V}{\partial \varphi^2} + \frac{\partial^2 V}{\partial z^2}
+     = 0 $$ Hierbei gilt: $\partial / \partial \varphi =0$ und
+     $\partial / \partial z =0$
+   \begin{enumerate}
+     \item Energiefunktional aufstellen:
+           $$W(V)= \frac{1}{2} \INT_a^b \rho \left( \frac{\partial
+           V}{\partial\rho}\right)^2\, d\rho + \left( \frac{1}{2} \, k_1
+           V^2(\rho) - V_c (\rho)V(\rho)\right)_a^b \quad\rightarrow\quad min$$
+     \item Ritz'scher  Ansatz (1-dimensional):
+      \begin{itemize}
+      \item $\tilde{V} = c_1g_1  + c_2g_2 + c_3g_3 = c_1 + c_2\rho + c_3\rho^2$
+      \item Transformation: $\rho = \rho_j + u (\rho_{j+1} - \rho_j)$ $\rho_1=a
+           \rightarrow 0$ und $\rho_2=\frac{a+b}{2} \rightarrow 0,5$, sowie
+           $\rho_3=b \rightarrow 1$ und $j=1$\\
+           $\Rightarrow \; \rho = a+u(b-a)$ Daraus folgt das transformierte
+           Energiefunktional:
+           $$W(\tilde{V}) = \frac{1}{2} \INT_0^1 \left( a + u(b-a)\right)
+           \frac{\left(\frac{\partial \tilde{V}}{\partial
+           u}\right)^2}{\left(\Delta\rho\right)^2} \delta \rho \, du + \left(
+           \frac{1}{2} k_1 \tilde{V}^2(u) - V_c(u) \tilde{V} (u) \right)_0^1$$
+      \item Anpa"sen der Ansatzfunktion: $\tilde{V}(u) = c_1 + c_2u + c_3u^2$\\
+           Einsetzen der gew"ahlten Punkte $\tilde{V}(0)= c_1$, $\tilde{V}(0,5)=
+           c_1 + \frac{1}{2} c_2 + \frac{1}{4}c_3$ und $\tilde{V}(1)= c_1 + c_2
+           + c_3$ liefert $B$-Matrix:
+           $$B=\left(\begin{array}{ccc}1&0&0\\1&1/2&1/4\\1&1&1\\
+             \end{array}\right)$$
+            L"osungsvektor $c=B^{-1}\tilde{V}^e$ bestimmen, dann einsetzen in
+           Ansatz:
+           \begin{eqnarray*}
+           \tilde{V}(u)&=& \tilde{V}_1^e + (-e\tilde{V}_1^e + 4\tilde{V}_2^e -
+           \tilde{V}_3^e) u + (2\tilde{V}_1^e - 4\tilde{V}_2^e + 2\tilde{V}_3^e)
+           u^2\\ &=& \tilde{V}_1^e \underbrace{(1-3u+2u^2)}_{N_1^e(u)} +
+           \tilde{V}_2^e \underbrace{(4u-4u^2)}_{N_2^e(u)} + \tilde{V}_3^e
+           \underbrace{-u+2u^2)}_{N_3^e(u)}
+           \end{eqnarray*}
+      \item Berechnung des Energiefunktionals "uber $S\tilde{f}^e+d=0$
+      \end{itemize}
+   \end{enumerate}
+
+\item[Typ 3 --- Gegeben:] eindimensionales Problem: drei Potentiale auf der
+     $x$-Achse.
+   \begin{enumerate}
+   \item Energiefunktional: $W(V)$ mit $a_2=a_3=a_0=0 \quad \Rightarrow$
+         Linienintegral und Integrand mit Grenzen
+   \item Transformationstabelle (f"ur eindimensional):
+     \begin{center}
+     \begin{tabular}{|c|c|c|c|c|}
+      Knoten-   & Koordinaten & Differenz   & Transformations- & Element \\
+      nummer $j$&   $x_i$     & $\Delta x_i$&  gleichung       &   j   \\ \hline
+      $\vdots$&$\vdots$ & $\Delta x_i=x_{j+1}-x_i$ & $x=x_i+u\Delta x_i$ & $\vdots$\\
+     \end{tabular}
+     \end{center}
+   \item Sind z.B. drei Elemente zu transformieren, ergeben sich auch drei
+     transformierte Energiefunktionale.
+      $$W_j(V)=\INT_0^1 \left(\frac{1}{2} \left[ a_1
+      \frac{\left(\frac{\partial V}{\partial u}\right)^2}{(\Delta x_j)^2} - a_4
+      V^2 \right] -a_5 V \right) \Delta x_j \, du + \left[ \frac{1}{2} k_1
+      V^2(u) -V_C(u)V(u)\right]_0^1$$
+   \end{enumerate}
+
+\item[Typ 4 --- Gegeben:] zweidimensionales Problem: Dreieck in allgemeiner Lage
+   \begin{enumerate}
+   \item Energiefunktional: $W(V)$ mit Laplace-Gleichung $a_1=a_2=1$ und
+         $a_3=a_4=a_5=a_0=0\quad\Rightarrow$ Fl"achenintegral und Kurvenintegral
+   \item Transformationstabelle (f"ur zweidimensional):
+      \begin{center}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+      Knoten-   &\multicolumn{2}{|c|}{Koord.}& Transforma-& \multicolumn{4}{|c|}{Differntialquot.}& Jakobi-& Element\\
+      nummer $i$&       $x_i$ & $y_i$        & tionsgleichung
+      &$\frac{du}{dx}$&$\frac{dv}{dx}$&$\frac{du}{dy}$&$\frac{dv}{dy}$& Determ.&
+      j   \\ \hline
+       $\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$\\
+      \end{tabular}
+      \end{center}
+      mit: $\frac{du}{dx}=\left(\frac{dx}{du}\right)^{-1}=\frac{1}{x_{j+1}-x_j}$\\
+      $x=x_j+u(x_{j+1}-x_j) + v(x_{j+2}-x_j)$;
+      $y=y_j+u(y_{j+1}-y_j) + v(y_{j+2}-y_j)$
+   \item Transformiertes Energiefunktional:
+    \begin{eqnarray*}
+     W_i(V(u,v))&=&\IINT_{D_0} \frac{1}{2} \left\{\left[\frac{\partial V}{\partial
+     u}\frac{du}{dx} + \frac{\partial V}{\partial v} \frac{dv}{dx} \right]^2 +
+     \left[\frac{\partial V}{\partial u}\frac{du}{dy} + \frac{\partial V}{\partial v}
+     \frac{dv}{dy} \right]^2  \right\}J\, dA_0 +\\
+     &&\oint_{C_0} \left[\frac{1}{2} k_1 V^2 - V_cv\right] \, ds_0 \quad \rightarrow
+     min  \end{eqnarray*}
+   \item Linearer Ansatz: $\tilde{V}(u,v)= V_1^e N_1^e(u,v) + V_2^e N_2^e(u,v)
+      + V_3^e N_3^e(u,v)$ daraus folgt: $\frac{\partial V}{\partial u}$ und
+      $\frac{\partial V}{\partial v}$, dann Einsetzen in Energiefunktional
+
+      Beachte: die $V_i^e$ sind von $u$, $v$ unabh"angig und werden vor das
+      Integral gezogen. Ergebnis des Integrals ist die Fl"ache des
+      Einheitsdreiecks ($\frac{1}{2}$).
+   \end{enumerate}
+
+\item[Typ 5 --- Gegeben:] eindimensionales Problem:
+     $$W_j(f)=\INT_0^1 \left(\frac{1}{2} \left[ a_1
+     \frac{\left(\frac{\partial f}{\partial u}\right)^2}{(\Delta x_j)^2} - a_4
+     f^2 \right] -a_5 f \right) \Delta x_j \, du + \left[ \frac{1}{2} k_1
+     f^2(u) -f_C(u)f(u)\right]_0^1 \; \rightarrow\; min$$
+     Aufgabe: L"osung eindimensionaler Randwertprobleme mit Hilfe der
+     Matrizenrechnung
+
+     $$W(f)=f^TSf + f^Td \;\rightarrow\; min \quad \mbox{oder}\quad Sf+d=0$$
+
+     $$\INT_0^1 \left(\frac{1}{2} \left[ a_1
+       \frac{\left(\frac{\partial f}{\partial u}\right)^2}{(\Delta x_j)^2} - a_4
+       f^2 \right] -a_5 f \right) \Delta x_j \, du = f^{e^T} S_j^e f^e + f^{e^T}
+       M_j^e f^e + f^{e^T} b_j^e \qquad \Rightarrow$$
+     $$f^{e^T} S_j^e f^e = \underbrace{\frac{a_1}{2\Delta x_j}}_{q_{j,1}}\: \INT_0^1
+       \left(\frac{\partial \tilde{f}}{\partial u} \right)^2\, du $$
+     $$f^{e^T} M_j^e f^e = \underbrace{-\frac{a_4}{2} \Delta x_j}_{q_{j,2}}\: \INT_0^1 \tilde{f}^2
+       \, du$$
+     $$f^{e^T} b_j^e = \underbrace{-a_5 \Delta x_j}_{q_{j,3}}\: \INT_0^1 \tilde{f}\, du$$
+   \begin{enumerate}
+   \item linearer Ansatz: $\tilde{f}(u)=f_1^eN_1^e(u)+f_2^eN_2^e(u)$ mit z.B.: $N_1^e
+         = 1-u$ und $N_2^e = u$ \\ $\frac{\partial \tilde{f}}{\partial u}$,
+         $\left(\frac{\partial \tilde{f}}{\partial u}\right)^2$, $\tilde{f}$ und
+         $\tilde{f}^2$ ermitteln und in die Integrale einsetzen.
+   \item Beispiel zur Ermittlung der Matrizen --- Integral liefert:
+         \begin{eqnarray*}
+         f^{e^T} S_j^e f^e &=& \underbrace{\frac{a_1}{2\Delta x_j}}_{q_{j,1}}\:
+         \left[\left(f_1^e\right)^2+2f_1^ef_2^e+\left(f_2^e\right)^2 \right] \\
+         &\Rightarrow& S_{j,1}^e = \left(\begin{array}{cc}1&-1\\-1&1\\
+         \end{array} \right) \; \rightarrow\; S_j^e=q_{j,1}S_{j,1}^e \\
+         f^{e^T} M_j^e f^e &=& \underbrace{-\frac{a_4}{2} \Delta x_j}_{q_{j,2}}\:
+         \left[ \frac{1}{3} \left(f_1^e\right)^2 + \frac{1}{3} f_1^ef_2^e +
+          \frac{1}{3} \left(f_2^e\right)^2 \right] \\
+         &\Rightarrow& M_{j,2}^e = \frac{1}{6}\left(\begin{array}{cc}2&+1\\+1&2\\
+         \end{array} \right) \; \rightarrow\; M_j^e=q_{j,2}M_{j,2}^e \\
+         f^{e^T} b_j^e &=& \underbrace{-a_5 \Delta x_j}_{q_{j,3}}\: \left[
+         \frac{1}{2} f_1^e + \frac{1}{2} f_2^e \right]\\
+         &\Rightarrow& b_{j,3}^e = \left(\begin{array}{c}1\\1\\
+         \end{array} \right) \; \rightarrow\; b_j^e=q_{j,3}b_{j,3}^e
+         \end{eqnarray*}
+         Beachte folgende Regel: gemischte Glieder
+         ($f_1,f_2$) auf zwei Werte aufteilen (Vorzeichen beachten) und mit
+         ganzzahligen Faktoren in die Matrix schreiben, hierzu ggf.\ erweitern.
+   \item quadratischer Ansatz: $\tilde{f}(u)=f_1^eN_1^e(u)+f_2^eN_2^e(u) +
+         f_3^eN_3^e(u)$ mit z.B.: $N_1^e
+         = 1-3u+2u^2$, $N_2^e = 4u-4u^2$ und $N_3^e=-u+2u^2$\\
+         $\frac{\partial \tilde{f}}{\partial u}$,
+         $\left(\frac{\partial \tilde{f}}{\partial u}\right)^2$, $\tilde{f}$ und
+         $\tilde{f}^2$ ermitteln und in die Integrale einsetzen.
+         Weiter: analog linearer Ansatz, Matrizen dann $3\times 3$
+   \end{enumerate}
+\item[Typ 6 --- Gegeben:] zweidimensionales Randwertproblem, L"osungsverfahren:
+     Zerlegen in Dreiecke, linearer Ansatz, Matrizenrechnung.
+   \begin{enumerate}
+   \item $\tilde{f}(u,v)=f_1^eN_1^e(u,v)+f_2^eN_2^e(u,v) + f_3^eN_3^e(u,v)$ \\
+         Formfunktionen f"ur das Einheitsdreieck: $N_1^e=1-u-v$, $N_2^e=u$ und
+         $N_3^e=v$
+   \item allgemeines transformiertes Energiefunktional
+         \begin{eqnarray*}
+          W_j(f)&=&\IINT_{D_0}\frac{1}{2}\left[
+          a_1\left(\frac{\partial f}{\partial u}\frac{du}{dx}+
+          \frac{\partial f}{\partial v}\frac{du}{dx}\right)^2 +
+          a_2\left(\frac{\partial f}{\partial u}\frac{du}{dy}+
+          \frac{\partial f}{\partial v}\frac{du}{dy}\right)^2 -a_4f^2
+          \right]\\&&-a_5f J\, du\, dv
+          +\oint_C\left[\frac{1}{2}k_1f^2-f_cf\right]\, ds_0\;\rightarrow\; min
+         \end{eqnarray*}
+   \item Integrale zur Bestimmung der Matrizen:
+         \begin{eqnarray*}
+         f^{e^T} q_{j,1} S_{j,1}^e f^e &=& \underbrace{\frac{J}{2}\left[a_1
+         \left(\frac{du}{dx}\right)^2 + a_2 \left( \frac{du}{dy} \right)^2
+         \right]}_{q_{j,1}}\:\IINT_{D_0}\left( \frac{\partial f}{\partial u}
+         \right)^2 \, du\, dv \\
+         f^{e^T} q_{j,2} S_{j,2}^e f^e &=& \underbrace{J\left[ a_1 \frac{du}{dx}
+         \frac{dv}{dx} + a_2 \frac{du}{dy} \frac{dv}{dy} \right] }_{q_{j,2}} \:
+         \IINT_{D_0} \frac{\partial f}{\partial u} \frac{\partial f}{\partial v}
+         \, du\, dv\\
+         f^{e^T} q_{j,3} S_{j,3}^e f^e &=& \underbrace{\frac{J}{2}\left[a_1
+         \left(\frac{dv}{dx}\right)^2 + a_2 \left( \frac{dv}{dy} \right)^2
+         \right] }_{q_{j,3}}\:\IINT_{D_0}\left( \frac{\partial f}{\partial v}
+         \right)^2 \, du\, dv \\
+         f^{e^T} q_{j,4} M_{j,4}^e f^e &=& \underbrace{-\frac{J}{2}
+         a_4}_{q_{j,4}} \: \IINT_{D_0} f^2\, du\, dv\\
+         f^{e^T} q_{j,5} b_{j,5}^e &=& \underbrace{-Ja_5}_{q_{j,5}}\:
+         \IINT_{D_0} f \,du \, dv
+         \end{eqnarray*}
+         Die Integranden ergeben sich aus dem L"osungsansatz $\tilde{f}$.
+\clearpage
+   \item Tabellen:
+         \begin{center}
+         \begin{tabular}{c||c|c|c|c||c}
+         Element & $\frac{du}{dx}$ & $\frac{dv}{dx}$ & $\frac{du}{dy}$ & $\frac{dv}{dy}$ & $J$ \\ \hline
+         $\vdots$ & $\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ \\
+         \end{tabular}
+         \end{center}
+
+         \begin{center}
+         \begin{tabular}{c||c|c|c|c|c}
+         Element & $q_{j,1}$ & $q_{j,2}$ & $q_{j,3}$ & $q_{j,4}$ & $q_{j,5}$ \\ \hline
+         $\vdots$ & $\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ \\
+         \end{tabular}
+         \end{center}
+
+         \item Mit Hilfe der f"ur das Einheitsdreieck bekannten Matrizen
+
+         \parbox{6cm}{$$S_{j,1}^e=\frac{1}{2}\left(\begin{array}{ccc}1&-1&0\\-1&1&0\\0&0&0\\ \end{array}\right)$$}
+         \parbox{6cm}{$$S_{j,2}^e=\frac{1}{2}\left(\begin{array}{ccc}2&-1&-1\\-1&0&1\\-1&1&0\\ \end{array}\right)$$}
+         \parbox{6cm}{$$S_{j,3}^e=\frac{1}{2}\left(\begin{array}{ccc}1&0&-1\\0&0&0\\-1&0&1\\ \end{array}\right)$$}
+         \parbox{6cm}{$$M_{j,4}^e=\frac{1}{24}\left(\begin{array}{ccc}2&1&1\\1&2&1\\1&1&2\\ \end{array}\right)$$}
+         \parbox{4cm}{$$b_{j,5}^e=\frac{1}{6}\left(\begin{array}{c}1\\1\\1\\ \end{array}\right)$$}
+         \parbox{4cm}{$$V^e=\left(\begin{array}{c}V_1\\V_2\\V_3\\ \end{array}\right)$$}
+
+         wird f"ur jedes Element $j$ die Matrix $S_j^e$ aufgestellt ($j$ -- Element, $i$ -- Knoten):
+         $$S_j^e = \sum_{i=1}^3 q_{j,i} S_{j,i}^e = q_{j,1}S_{j,1}^e+q_{j,2}S_{j,2}^e+q_{j,3}S_{j,3}^e$$
+
+         \item Gesamtmatrix ($S$): Dimension: $k\times k$ ($k$ -- Anzahl der Knoten)
+         \begin{enumerate}
+         \item Knoten der Gesamtanordnung numerieren
+         \item Knoten der Einzelelemente numerieren (beginnen auf der $x$-Achse,
+               weiter gegen Uhrzeigersinn)
+         \item Hauptdiagonalenelemente: Summe der an den Dreiecken beteiligten
+               Knotenpunkten (aus der Hauptdiagonalen der Elemente der $S_j^e$)
+         \item "ubrige Elemente (symetrisch): nicht verbundene Hauptknoten $=0$
+               --- verbundene Hauptknoten $n$ und $m$ bilden das Matrixelement
+               $S_{n,m}$, Summe der Geraden der beteiligten Dreiecke (Indizes
+               der Einzelelemente verwenden).
+         \end{enumerate}
+         \item $d$-Matrix enth"alt die gegebene Potentialverteilung der Knoten
+               (Strecken).
+   \end{enumerate}
+\end{description}
+%==============================================================================
+\clearpage \section{Skin-Effekt}
+Vereinbarungen "uber die Schreibweise:
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep\fill}p{13cm}}
+$\check{F}$&Feld allgemein, entspricht $\check{A}$, $\check{H}$\\
+$\vec{F}(\vec{r},t)$&Vektor, orts- und zeitabh"angig, {\it nicht}\/ quellenfrei\\
+$\vec{F}^{\ast}(\vec{r},t)$&Vektor, orts- und zeitabh"angig, quellenfrei\\
+$\check{F}(\vec{r})$&ortsabh"angige komplexe Amplitude ($\omega=const$)\\
+$\check{F}^{\ast}(\vec{r})$&ortsabh"angige konjugiert komplexe Amplitude
+      ($\omega=const$)\\
+      &$\check{F}=\underline{\check{\vec{F}}}$ (Raumzeiger oder Vektor)\\
+$\underline{\hat{F}}_x$&x-Komponente der ortsabh"angigen komplexen Amplitude\\
+$\overline{F}(\vec{r})$&vektorieller Mittelwert\\
+\end{tabular*}
+
+
+\subsection{Wichtige Formeln}
+
+$$\check{S}=-j\omega\kappa\check{A}=-\kappa\frac{\partial\check{A}}{\partial t}=
+\ROT \check{H}\qquad {\rm mit} \quad\frac{\partial}{\partial t}=j\omega$$
+$$\oint Hd\vec{s}=\underline{\hat{I}}\qquad\check{H}=\frac{1}{\mu}\ROT\check{A}
+\qquad \ROT\check{A}=\check{B}$$
+
+\begin{itemize}
+\item komplexe Transformation $i(t)=\hat{i}\cos\omega t \Rightarrow
+      \underline{\hat{I}}=\hat{i}\left[\cos\omega t - j\sin\omega t\right]$
+\item Skinkonstante: $\alpha^2=j\omega\kappa\mu $
+\item bei Strombelag an einer Grenzfl"ache:
+      $\vec{n}\times(\vec{H}_2-\vec{H}_1)=\vec{K}$
+\item eine hochpermeable Grenzfl"ache $\Rightarrow$ einmal an der Fl"ache spiegeln
+      ergibt Ersatzanordnung mit $I=I'$
+\item zwei parallele, hochpermeable Grenzfl"achen $\Rightarrow$ an der Fl"ache
+      spiegeln, ergibt
+      unendlich ausgedehnte Anordnung (z.B.\ $\frac{\partial}{\partial y}=0$)
+\item unendlich lange Ausdehnung in z.B.\ $z$-Richtung $\Rightarrow
+      \frac{\partial}{\partial z}=0$
+\item rotation"symetrisch $\Rightarrow \frac{\partial}{\partial \varphi}=0$
+\item f"ur $\frac{\partial}{\partial y}=\frac{\partial}{\partial z}=0 \Rightarrow
+      \ROT\check{A}=-\vec{e}_x\frac{\partial \underline{\hat{A}}_z}{\partial x}$
+\item f"ur $\frac{\partial}{\partial \varphi}=\frac{\partial}{\partial z}=0 \Rightarrow
+      \ROT\check{A}=-\vec{e}_{\varphi}\frac{\partial\underline{\hat{A}}_z}{\partial\rho}$
+\end{itemize}
+%------------------------------------------------------------------------------
+\clearpage
+\subsection{Rechteckleiter --- kartesische Koordinaten}
+\begin{enumerate}
+%\item gesuchte Gr"o"sen einsetzen,
+\item immer die $z$-gerichtete Gr"o"se w"ahlen, z.B.\
+      $\underline{\hat{I}}_z$ gegeben $\Rightarrow$ Skingleichung mit
+      $\underline{\hat{H}}$ aufstellen. Au"ser $H_z$ ist gegeben, dann $A$
+      aufstellen.
+%\item $B$ gegeben $\Rightarrow$ Skingleichung mit
+\item Richtung und Abh"angigkeit ermitteln (z.B.\ f"ur $\frac{\partial}{\partial
+      y} = \frac{\partial}{\partial z}=0$ und $\vec{I}=\vec{e}_z I$)
+      $$\check{B}=\ROT \check{A} =
+      \begin{array}{|ccc|}\vec{e}_x&\vec{e}_y&\vec{e}_z\\
+      \frac{\partial}{\partial x}&0&0\\0&0&\underline{\hat{A}}_z\\ \end{array} =
+      -\vec{e}_y \frac{\partial \underline{\hat{A}}_z}{\partial x} \quad
+      \Rightarrow\quad \underline{\hat{H}}_y(x)$$
+\item Skingleichung f"ur Teilr"aume aufstellen (f"ur verschiedene Stromrichtung
+      verschiedene Teilr"aume), hierbei zus"atzlich Indizierung verwenden:
+   \begin{itemize}
+   \item Teilraum $\kappa \not= 0$:
+         $$\Delta \check{F} - \alpha^2 \check{F} =0 \Rightarrow \frac{\partial^2
+         \underline{\hat{F}}_y(x)}{\partial x^2}-\alpha^2 \hat{F}(x) =0$$
+         mit $\frac{\partial}{\partial y}=\frac{\partial}{\partial z}=0$
+         und $\alpha^2 =j\omega \kappa \mu$ (Skinkonstante)
+
+         {\bf L"osungsansatz:} $\underline{\hat{F}}(x)=\underline{\hat{C}}_1 \cosh(\alpha
+                      x)+\underline{\hat{C}}_2 \sinh(\alpha x)$
+
+    \item Teilraum $\kappa = 0$:
+          $$\Delta \check{F} =0 \Rightarrow \frac{\partial^2 \underline{\hat{F}}(x)}{
+          \partial x^2}=0$$ mit $\frac{\partial}{\partial y}=
+          \frac{\partial}{\partial z}=0$ und $\alpha^2 =0$
+
+          {\bf L"osungsansatz:} $\underline{\hat{F}}(x)=\underline{\hat{C}}_3
+                      +\underline{\hat{C}}_4 x$
+    \end{itemize}
+\item L"osung durch Bestimmen der Konstanten
+    \begin{itemize}
+    \item $\check{H}$ -- Feld kann im Unendlichen nicht $\infty$ werden
+          $\Rightarrow\quad \underline{\hat{C}}_4 =0$
+    \item f"ur die gesuchte Gr"o"se im Teilraum $\kappa\not=0$
+          \begin{itemize}
+          \item Teilr"aume und enthaltene Gr"o"sen unsymetrisch $\Rightarrow$
+                ungerade Funktion $(\sinh(x))\quad\Rightarrow\quad
+                \underline{\hat{C}}_1 =0$
+          \item Teilr"aume und enthaltene Gr"o"sen symetrisch $\Rightarrow$
+                gerade Funktion $(\cosh(x))\quad\Rightarrow\quad
+                \underline{\hat{C}}_2 =0$
+          \end{itemize}
+    \item Betrachtung von $\underline{\hat{F}}(x)$ an den Grenzfl"achen, wenn
+          gilt:
+          \begin{itemize}
+          \item kein Strombelag: Stetigkeit, da innen = au"sen
+          \item Strombelag: $\vec{n}\times(\vec{H}_2-\vec{H}_1)=\vec{K}$\\
+                (wobei $\vec{n}$ Tangentenvektor der Fl"ache mit Belag)
+          \end{itemize}
+    \end{itemize}
+\item Strom $\underline{\hat{I}}$ gegeben $\Rightarrow$ Berechnung durch
+      $\oint H\, d\vec{s}=\underline{\hat{I}}$ auf der Berandung des
+      Teilgebietes $\int_a^bHdx+\int_c^dHdy+\int_e^fHdx+\int_g^hHdy=I$, wobei
+      hier z.B.\ $dy=0$
+%      --- Skingleichung f"ur das Vektorpotential $\check{A}$ aufstellen
+%\item Induktion $\underline{\hat{B}}$ gegeben: $\Rightarrow$ Berechnung durch
+%      $\hat{B}=\ROT\hat{A}$
+\item die bestimmten Konstanten in L"osungsans"atze einsetzen.
+\item Stromdichte $\check{S} = \ROT\check{H}$ (nach Bestimmung von
+      $\ROT\check{H}$ mu"s noch abgeleitet werden)
+%\item Eindringtiefe:
+%\item Komplexer Widerstand:
+
+\end{enumerate}
+%------------------------------------------------------------------------------
+\clearpage
+\subsection{Rundleiter --- Zylinderkoordinaten}
+\begin{enumerate}
+%\item gesuchte Gr"o"sen einsetzen,
+\item bei rotation"symetrischen Anordnungen die $\vec{e}_z$-gerichtete Gr"o"se
+      ansetzen, z.B.\ $\underline{\hat{I}}_z$ gegeben $\Rightarrow$ Skingleichung
+      mit $\underline{\hat{H}}$ aufstellen. Au"ser $H_z$ ist gegeben, dann $A$
+      aufstellen.
+%\item $B$ gegeben $\Rightarrow$ Skingleichung mit
+\item Richtung und Abh"angigkeit ermitteln (z.B.\ f"ur $\frac{\partial}{\partial
+      \varphi} = \frac{\partial}{\partial z}=0$ und $\vec{I}=\vec{e}_z I$)
+      $$\check{B}=\ROT \check{A} =
+      \begin{array}{|ccc|}\vec{e}_{\rho}&\vec{e}_{\varphi}&\vec{e}_z\\
+      \frac{\partial}{\partial \rho}&0&0\\0&0&\underline{\hat{A}_z}\\ \end{array} =
+      -\vec{e}_{\varphi}\frac{\partial \underline{\hat{A}}_z}{\partial \varphi} \quad
+      \Rightarrow\quad \underline{\hat{H}}_{\varphi}(\rho)$$
+\item Skingleichung f"ur Teilr"aume aufstellen (f"ur verschiedene Stromrichtung
+      verschiedene Teilr"aume), hierbei zus"atzlich Indizierung verwenden:
+   \begin{itemize}
+   \item Teilraum $\kappa \not= 0$:
+         $$\Delta \check{F} - \alpha^2 \check{F} =0 \Rightarrow \frac{\partial^2
+         \underline{\hat{F}}(\rho)}{\partial \rho^2}+\frac{1}{\rho}\frac{\partial
+         \underline{\hat{F}}(\rho)}{\partial \rho}
+         -\alpha^2 \underline{\hat{F}}(\rho) =0$$
+         mit $\frac{\partial}{\partial \varphi}=
+         \frac{\partial}{\partial z}=0$ und $\alpha^2 =j\omega \kappa \mu$
+
+         {\bf L"osungsansatz:} $\underline{\hat{F}}(\rho)=\underline{\hat{C}}_1{\cal I}_0
+         (\alpha\rho)+\underline{\hat{C}}_2 {\cal K}_0(\alpha \rho)$
+         (modifizierte Be"selfunktion)
+
+   \item Teilraum $\kappa = 0$:
+         $$\Delta \check{F} =0 \Rightarrow \frac{\partial^2 \underline{\hat{F}}(\rho)}{
+         \partial \rho^2}+\frac{1}{\rho}\frac{\partial \underline{\hat{F}}(\rho)}{
+         \partial \rho}=0$$ mit $\frac{\partial}{\partial \varphi}=
+         \frac{\partial}{\partial z}=0$ und $\alpha^2 =0$
+
+         {\bf L"osungsansatz:} $\underline{\hat{F}}(\rho)=\underline{\hat{C}}_3
+         +\underline{\hat{C}}_4 \ln\left(\frac{\rho}{R}\right)$
+   \end{itemize}
+\item L"osung durch Betrachtung der modifizierten Be"selfunktionen
+      $$\frac{d{\cal I}_n(x)}{dx}={\cal I}_{n+1}(x)+\frac{n}{x}{\cal I}_n(x)
+      \quad {\rm und} \quad
+      \frac{d{\cal K}_n(x)}{dx}=-{\cal K}_{n+1}(x)-\frac{n}{x}{\cal K}_n(x)$$
+\item L"osung durch Bestimmen der Konstanten
+    \begin{itemize}
+    \item $\check{H}$ -- Feld kann im Unendlichen nicht $\infty$ werden
+          $\Rightarrow\quad \underline{\hat{C}}_4 =0$
+    \item Betrachtung von $\underline{\hat{F}}(\rho)$ an den Grenzfl"achen, wenn
+          gilt:
+          \begin{itemize}
+          \item kein Strombelag: Stetigkeit, da innen = au"sen
+          \item Strombelag: $\vec{n}\times(\vec{H}_2-\vec{H}_1)=\vec{K}$\\ (wobei
+                $\vec{n}$ Tangentenvektor der Fl"ache mit Belag --- meistens
+                $\vec{e}_{\rho}$)
+          \end{itemize}
+    \end{itemize}
+\item Strom $\underline{\hat{I}}$ gegeben $\Rightarrow$  $\check{H}$ kann durch
+      umschlo"senen Strom bestimmt werden "uber
+      $\oint Hd\vec{s}=\underline{\hat{I}}\qquad \Rightarrow$\\
+      $\check{H}=\vec{e}_{\varphi}\frac{\hat{I}_0}{2\pi\rho}$ f"ur $I_0$ in
+      $z$-Richtung und $\kappa=0$ (Au"senraum)\\
+      $\check{H}=\vec{e}_{\varphi}\frac{\hat{I}_0}{2\pi r^2}\rho$ f"ur $I_0$ in
+      $z$-Richtung und $\kappa\not=0$ (Innenraum).
+%\item Induktion $\underline{\hat{B}}$ gegeben: $\Rightarrow$ Berechnung durch
+%      $\hat{B}=\ROT\hat{A}$
+\item die bestimmten Konstanten in L"osungsans"atze einsetzen.
+\item Stromdichte $\check{S} = \ROT\check{H}$ (nach Bestimmung von
+      $\ROT\check{H}$ mu"s noch abgeleitet werden)
+%\item Eindringtiefe:
+%\item Komplexer Widerstand:
+
+\end{enumerate}
+
+%==============================================================================
+\clearpage \section{Wellen}
+%------------------------------------------------------------------------------
+\subsection{Freie Wellenausbreitung im Raum}
+$$\ROT\ROT \vec{F}+\mu\epsilon\frac{\partial^2\vec{F}}{\partial f^2}=0$$
+
+\subsubsection{Seperation in kartesischen Koordinaten}
+$$\Delta\underline{\hat{F}}_i=\frac{\partial^2 \underline{\hat{F}}_i}{\partial
+x^2}+\frac{\partial^2 \underline{\hat{F}}_i}{\partial
+y^2}+\frac{\partial^2 \underline{\hat{F}}_i}{\partial
+z^2}=-\beta^2\underline{\hat{F}}_i $$
+mit $i=x,y,z$ und $\beta^2=\omega^2\mu\epsilon$
+
+Produktansatz von Bernoulli:
+$\underline{\hat{F}}_i(x,y,z)=X_i(X)\cdot Y_i(y)\cdot \underline{\hat{Z}}_i(z)$
+f"uhrt zu den Differentialgleichungen:
+$$\underbrace{\frac{1}{X_i}\frac{d^2X_i}{dx^2}}_{-p^2}+
+  \underbrace{\frac{1}{Y_i}\frac{d^2Y_i}{dy^2}}_{-q^2}+\underbrace{\frac{1}{
+   \underline{\hat{Z}}_i}\left(\frac{d^2\underline{\hat{Z}}_i}{dz^2}+\beta^2
+   \underline{\hat{Z}}_i\right)}_{p^2+q^2}=0$$
+Das f"uhrt auf drei gew"ohnliche Differentialgleichungen:
+$$\frac{d^2X_i}{dx^2}+p^2X_i=0 \qquad \frac{d^2Y_i}{dy^2}+q^2Y_i=0 \qquad
+\frac{d^2\underline{\hat{Z}}_i}{dz^2}+(\beta^2-p^2-q^2)\cdot\underline{\hat{Z}}_i=0$$
+deren L"osungen lauten:
+\begin{eqnarray*}
+X_i(x)&=&C_p\cos px+D_p\sin px\\Y_i(y)&=&E_q\cos qx+F_q\sin qx\\\underline{\hat{Z}}_i
+(z)&=&M e^{-j\beta ' z}+N e^{j\beta ' z}
+\end{eqnarray*}
+Funktionen der in $\pm z$-Richtung fortschreitenden Welle mit $\beta
+'^2=\beta^2-p^2-q^2$
+
+\subsubsection{Seperation in Zylinderkoordinaten}
+$$\Delta\underline{\hat{F}}=\frac{d^2\underline{\hat{F}}}{d\rho^2}+\frac{1}{\rho}
+  \frac{d\underline{\hat{F}}}{d\rho}+\frac{1}{\rho^2}
+  \frac{d\underline{\hat{F}}}{d\varphi^2}
+  +\frac{d^2\underline{\hat{F}}}{dz^2}=\beta^2\underline{\hat{F}}$$
+  mit $i=x,y,z$
+
+Produktansatz von Bernoulli:
+$\underline{\hat{F}}(\rho,\varphi,z)=R(\rho)\cdot \Phi(\varphi)\cdot
+ \underline{\hat{Z}}_i(z)$
+f"uhrt zu den Differentialgleichungen:
+$$\underbrace{\frac{1}{R}\left(\frac{d^2R}{d\rho^2}+\frac{1}{\rho}
+   \frac{dR}{d\rho} \right)}_{-p^2+\frac{m^2}{\rho^2}}+
+   \underbrace{\frac{1}{\rho^2}\frac{1}{\Phi}\frac{d^2\Phi}{d\varphi^2}}_{
+   -\frac{m^2}{\rho^2}}+\underbrace{\frac{1}{
+   \underline{\hat{Z}}}\frac{d^2\underline{\hat{Z}}}{dz^2}+\beta^2}_{q^2}=0$$
+Das f"uhrt auf eine gew"ohnliche Be"sel-Differentialgleichung und zwei
+Differentialgleichungen f"ur harmonische Schwingung mit $\beta'^2=\beta^2-p^2$:
+$$\frac{d^2R}{d(pq)^2}+\frac{1}{pq}\frac{dR}{d(pq)}+\left(1-\frac{m^2}{p^2q^2}R
+   \right)=0$$
+$$\frac{d^2\Phi}{d\varphi^2}+m^2\Phi=0 \qquad
+  \frac{d^2\underline{\hat{Z}}_i}{dz^2}+\beta'^2\underline{\hat{Z}}=0$$
+deren L"osungen lauten:
+\begin{eqnarray*}
+R(\rho)&=&C_m{\cal J}_m(pq)+D_m{\cal N}_m(pq)\\\Phi(\varphi)&=&E_m\cos
+m\varphi+F_m\sin m\varphi\\ \underline{\hat{Z}}
+(z)&=&M e^{-j\beta'z}+N e^{j\beta ' z}
+\end{eqnarray*}
+
+\subsubsection{Seperation in Kugelkoordinaten}
+Wellen breiten sich in $r$-Richtung aus $\Rightarrow$ Beschr"ankung auf
+rotation"symetrische Anordnungen:
+$\check{A}=\vec{e}_r\underline{\hat{A}}(r,\vartheta)$
+$$\Delta\underline{\hat{A}}=\frac{\partial\underline{\hat{A}}}{\partial r^2}+
+\frac{\cot\vartheta}{r^2}
+\frac{\partial\underline{\hat{A}}}{\partial\vartheta}+\frac{1}{r^2}
+\frac{\partial^2\underline{\hat{A}}}{\partial\vartheta^2}=-\beta^2
+\underline{\hat{A}}$$
+mit $\beta^2=\omega^2\mu z$
+Produktansatz von Bernoulli:
+$\underline{\hat{A}}(r,\vartheta)=\underline{\hat{R}}(r)\cdot\Theta(\vartheta)$
+f"uhrt nach Substitution zu der gew"ohnlichen Be"sel'schen Differentialgleichung
+$(n+1/2)$-Ordnung
+$$\frac{d^2\underline{\hat{R}}}{d(\beta r)^2}+\frac{1}{\beta r}
+   \frac{d\underline{\hat{R}}}{d(\beta r)}+\left[1-\left(\frac{n+1/2}{\beta r}
+   \right)^2\right]\underline{\hat{R}}'=0$$
+
+und der Differentialgleichung f"ur gew"ohnliche orthogonale Kugelfunktionen:
+$$\frac{d}{du}\left[(1-u)^2\frac{d\Theta}{du}\right]+n(n+1)\Theta=0$$
+
+deren L"osungen lauten:
+$$\underline{\hat{R}}'(r)=C_n{\cal J}_{n+1/2}(\beta r)+D_n
+   {\cal N}_{n+1/2}(\beta r)$$
+
+\subsubsection{Ebene Wellen, periodisch}
+$$\frac{d^2\check{A}(z)}{dz^2}=-\beta^2 \check{a}(z)$$
+$$\vec{A}(z,t)=\Re\left[\check{A}_1e^{j(\omega t-\beta
+z)}+\check{A}_2e^{j(\omega t+\beta z)}\right]$$
+
+\subsubsection{Reflektion ebener Wellen}
+Brechungsgesetz von Snellius: $\frac{n_1}{n_2}=\frac{\sin\theta_t}{\sin\theta_e}$
+Grenzwinkel f"ur Totalreflektion: $\theta_{e\; tot}=\arcsin\frac{n_2}{n_1}$
+
+%\subsubsection{Kugelwellen}
+
+%------------------------------------------------------------------------------
+\clearpage \subsection{Gef"uhrte Wellenausbreitung in Leitern}
+%\subsubsection{Beliebige zylindrische Hohlleiter}
+\subsubsection{Rechteckhohlleiter}
+\begin{enumerate}
+\item TE -- Wellen
+\item TM -- Wellen
+\end{enumerate}
+\subsubsection{Kreiszylindrische Hohlleiter}
+
+\subsubsection{TEM -- Wellen auf Leitern}
+\end{document}
